@@ -1,1 +1,93 @@
 
+name: Predictive Maintenance ML Pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-prepare:
+    name: Validate and prepare data
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate dataset
+        run: python scripts/validate_data.py
+
+      - name: Prepare train and test data
+        run: python scripts/prepare_data.py
+
+      - name: Upload prepared data
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepared-data
+          path: |
+            artifacts/X_train.csv
+            artifacts/X_test.csv
+            artifacts/y_train.csv
+            artifacts/y_test.csv
+
+  train-and-evaluate:
+    name: Train and evaluate model
+    needs: validate-and-prepare
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download prepared data
+        uses: actions/download-artifact@v4
+        with:
+          name: prepared-data
+          path: artifacts
+
+      - name: Train and evaluate models
+        run: python scripts/train_model.py
+
+      - name: Upload model and evaluation results
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model-and-evaluation
+          path: |
+            models/best_model.joblib
+            artifacts/evaluation.json
+            artifacts/model_comparison.csv
+            artifacts/workflow_experiments.csv
+
+      - name: Commit updated model and evaluation
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add models/best_model.joblib artifacts/evaluation.json
+          git diff --cached --quiet || git commit -m "Update trained model and evaluation [skip ci]"
+          git push
+
