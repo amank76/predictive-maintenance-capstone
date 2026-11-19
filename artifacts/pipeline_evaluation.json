@@ -1,0 +1,22 @@
+{
+  "selected_model": "Gradient Boosting",
+  "best_parameters": {
+    "model__learning_rate": 0.05,
+    "model__n_estimators": 20
+  },
+  "cv_f1": 0.7772805555515054,
+  "accuracy": 0.6501151778858459,
+  "precision": 0.6494002181025081,
+  "recall": 0.9671132764920828,
+  "f1": 0.7770347414777361,
+  "confusion_matrix": [
+    [
+      158,
+      1286
+    ],
+    [
+      81,
+      2382
+    ]
+  ]
+}

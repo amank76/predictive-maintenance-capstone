@@ -1,0 +1,100 @@
+{
+  "best_model": "Gradient Boosting",
+  "selection_metric": "3-fold CV F1 on training set",
+  "models": [
+    {
+      "model": "Decision Tree",
+      "cv_f1": 0.7440265771431916,
+      "accuracy": 0.6403890453033018,
+      "precision": 0.687057991513437,
+      "recall": 0.7888753552578157,
+      "f1": 0.7344547344547344,
+      "roc_auc": 0.6686565040718985,
+      "parameters": {
+        "model__min_samples_leaf": 1,
+        "model__max_depth": 3
+      }
+    },
+    {
+      "model": "Random Forest",
+      "cv_f1": 0.7484954345078862,
+      "accuracy": 0.6485794727412337,
+      "precision": 0.6887119113573407,
+      "recall": 0.807551766138855,
+      "f1": 0.7434124462717249,
+      "roc_auc": 0.6748363311638286,
+      "parameters": {
+        "model__n_estimators": 30,
+        "model__min_samples_leaf": 3,
+        "model__max_depth": null
+      }
+    },
+    {
+      "model": "Extra Trees",
+      "cv_f1": 0.765885352340859,
+      "accuracy": 0.6585615561812133,
+      "precision": 0.6826269815593659,
+      "recall": 0.8566788469346326,
+      "f1": 0.7598127475693194,
+      "roc_auc": 0.694843517859332,
+      "parameters": {
+        "model__n_estimators": 30,
+        "model__min_samples_leaf": 3,
+        "model__max_depth": null
+      }
+    },
+    {
+      "model": "Gradient Boosting",
+      "cv_f1": 0.7744674102678437,
+      "accuracy": 0.659073457896084,
+      "precision": 0.662827526634034,
+      "recall": 0.9346325619163621,
+      "f1": 0.7756064690026954,
+      "roc_auc": 0.6924864729295513,
+      "parameters": {
+        "model__n_estimators": 30,
+        "model__max_depth": 3,
+        "model__learning_rate": 0.05
+      }
+    },
+    {
+      "model": "AdaBoost",
+      "cv_f1": 0.7734086785431872,
+      "accuracy": 0.6304069618633222,
+      "precision": 0.6304069618633222,
+      "recall": 1.0,
+      "f1": 0.7733124018838304,
+      "roc_auc": 0.6524660543917007,
+      "parameters": {
+        "model__n_estimators": 30,
+        "model__learning_rate": 0.05
+      }
+    },
+    {
+      "model": "Bagging",
+      "cv_f1": 0.6955435322175285,
+      "accuracy": 0.6188891732787305,
+      "precision": 0.6957395498392283,
+      "recall": 0.702801461632156,
+      "f1": 0.6992526762270248,
+      "roc_auc": 0.6407204746593068,
+      "parameters": {
+        "model__n_estimators": 10,
+        "model__max_samples": 1.0
+      }
+    }
+  ],
+  "confusion_matrix": [
+    [
+      273,
+      1171
+    ],
+    [
+      161,
+      2302
+    ]
+  ],
+  "test_size": 3907,
+  "train_size": 15628,
+  "class_label_caveat": "Positive class is numerical label 1; operational meaning not verified"
+}

@@ -1,0 +1,7 @@
+model,cv_f1_mean,best_parameters
+Decision Tree,0.7544080299168834,"{""model__max_depth"": 4, ""model__min_samples_leaf"": 20}"
+Bagging,0.7350282406449965,"{""model__max_samples"": 0.8, ""model__n_estimators"": 25}"
+Random Forest,0.7638541801294932,"{""model__max_depth"": 8, ""model__n_estimators"": 35}"
+AdaBoost,0.7757517993570632,"{""model__learning_rate"": 0.2, ""model__n_estimators"": 35}"
+Gradient Boosting,0.7772805555515054,"{""model__learning_rate"": 0.05, ""model__n_estimators"": 20}"
+XGBoost,0.762687604731244,"{""model__max_depth"": 3, ""model__n_estimators"": 20}"
